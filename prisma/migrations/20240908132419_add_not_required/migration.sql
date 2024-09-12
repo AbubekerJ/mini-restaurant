@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Category" ALTER COLUMN "color" DROP NOT NULL,
+ALTER COLUMN "img" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Product" ALTER COLUMN "img" DROP NOT NULL,
+ALTER COLUMN "options" DROP NOT NULL;

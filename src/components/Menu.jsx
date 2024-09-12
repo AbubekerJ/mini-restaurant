@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Cart from "./Cart";
+import {  signOut, useSession } from "next-auth/react";
+import {  useRouter } from "next/navigation";
 
 const menues = [  {
     id:1,
@@ -25,7 +27,14 @@ const menues = [  {
 
 const Menu = () => {
     const [open, setOpen] = useState(false);
-    const user=true
+    const { status} = useSession()
+    const router = useRouter();
+    const handleLogout =async ()=>{
+      await signOut()
+      await router.push('/')
+
+    }
+  
   return (
     <div>
             {/* MOBILE */}
@@ -54,7 +63,12 @@ const Menu = () => {
               </Link>
               
             ))}
-            {user?<Link href={'/orders'} onClick={()=>setOpen(false)} >Orders</Link>:<Link href={'/login'} onClick={()=>setOpen(false)}>Login</Link>} 
+       {status==='authenticated'?(<div className="flex flex-col gap-2"> 
+        <Link href={'/orders'} onClick={()=>setOpen(false)} >Orders</Link>
+        <h1 onClick={handleLogout} className="uppercase cursor-pointer">logOut</h1>
+       </div>
+      
+      ):<Link href={'/login'} onClick={()=>setOpen(false)}>Login</Link>} 
 
             {/* i create cart component because i am using this compnent in navbar and i dont want to make my navbar client componnt since cart is interactive */}
             <Link href={'/cart'} onClick={()=>setOpen(false)}>
@@ -72,7 +86,12 @@ const Menu = () => {
               </Link>
               
             ))}
-       {user?<Link href={'/orders'} onClick={()=>setOpen(false)} >Orders</Link>:<Link href={'/login'} onClick={()=>setOpen(false)}>Login</Link>} 
+       {status==='authenticated'?(<div className="flex gap-2"> 
+        <Link href={'/orders'} onClick={()=>setOpen(false)} >Orders</Link>
+        <h1 onClick={()=>signOut()} className="uppercase cursor-pointer">logOut</h1>
+       </div>
+      
+      ):<Link href={'/login'} onClick={()=>setOpen(false)}>Login</Link>} 
 
             <Link href={'/cart'} >
             <Cart/>

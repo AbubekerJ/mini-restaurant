@@ -1,7 +1,20 @@
+"use client"
+
+import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const page = () => {
+  const router  = useRouter()
+  const { status}=useSession()
+  if(status==='loading'){
+    return <p>Loading</p>
+  }
+
+  if(status==='authenticated'){
+   router.push('/')
+  }
   return (
     <div className='flex flex-col md:flex-row h-[calc(100vh-3.5rem)] md:items-center md:justify-center   '>
         {/* image container */}
@@ -12,9 +25,9 @@ const page = () => {
         <div className='w-full h-[60%]   md:h-[70%] -500  md:w-[25%] shadow-md shadow-gray-300 border flex flex-col gap-2 md:gap-4 p-4'>
            <h1 className='font-bold text-lg'>welcome</h1>
            <p className='text-sm'>Log in to your account or creat new one using social accounts</p>
-           <button className='flex gap-3 border shadow-gray-200 p-2 rounded-md py-4'>
+           <button onClick={()=>signIn('google')} className='flex gap-3 border shadow-gray-200 p-2 rounded-md py-4'>
              <Image src={'/google.png'} width={20} height={20}/>
-             <h1 className='text-sm '>sign in with google</h1>
+             <h1 className='text-sm ' >sign in with google</h1>
            </button>
            <button className='flex gap-3 border shadow-gray-200 p-2 rounded-md py-4'>
              <Image src={'/facebook.png'} width={20} height={20}/>

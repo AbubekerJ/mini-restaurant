@@ -1,7 +1,21 @@
-import { menu } from "@/data";
+
 import Link from "next/link";
 
-const Home = () => {
+const getData = async ()=>{
+  const res =  await fetch('http://localhost:3000/api/catagories',{
+    cache:'no-store'
+  })
+   if(!res.ok){
+    throw new Error('somthing went wrong')
+   }
+   return res.json()
+}
+
+
+
+
+const Home = async() => {
+  const menu = await getData()
   return (
     <div className="flex flex-col md:flex-row items-center justify-center p-7 md:p-24   lg:p-30 h-[calc(100vh-4.5rem)] w-full ">
       {menu.map((item) => (

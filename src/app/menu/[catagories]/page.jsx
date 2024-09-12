@@ -1,16 +1,30 @@
-import { pizzas } from '@/data'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
 import React from 'react'
 
-const Catagories = () => {
+const getData = async (slug)=>{
+  const res  =await  fetch(`http://localhost:3000/api/products?cat=${slug}`)
+  if(!res.ok){
+    throw new Error("somthing went wrong")
+  }
+
+  return res.json()
+}
+
+const Catagories = async ({params}) => {
+
+  const products = await getData(params.catagories)
+  console.log(products)
+
   return (
+  
     <div className='flex flex-wrap  '>
-      {pizzas.map((item)=>(
+      {products.map((item)=>(
         <Link  href={`/products/${item.id}`} className=' even:bg-green-100 flex flex-col justify-between p-5  relative border-r-2 border-b-2  border-blue-500 h-[60vh] w-full md:w-1/2 lg:w-1/3 group'>
            <div className='relative h-[80%]'>
-           <Image src={item.img} fill/>
+          {item.img &&( <Image src={item.img} fill/>)}
            </div>
           
           <div className='flex justify-between items-center '>
