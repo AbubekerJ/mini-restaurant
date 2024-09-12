@@ -16,7 +16,7 @@ const getData = async ()=>{
 
 const Featured =async () => {
   const featuredProducts = await getData()
-  console.log(featuredProducts)
+  
   return (
     <div className='w-screen overflow-x-scroll text-blue-600'>
       {/* wrapper */}

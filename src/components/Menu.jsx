@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import {  signOut, useSession } from "next-auth/react";
 import {  useRouter } from "next/navigation";
 
+
 const menues = [  {
     id:1,
     title:'Home',
@@ -27,14 +28,14 @@ const menues = [  {
 
 const Menu = () => {
     const [open, setOpen] = useState(false);
-    const { status} = useSession()
+    const { status } = useSession();
     const router = useRouter();
-    const handleLogout =async ()=>{
-      await signOut()
-      await router.push('/')
+    const handleLogout =()=>{
+       signOut()
+       router.push('/')
 
     }
-  
+
   return (
     <div>
             {/* MOBILE */}

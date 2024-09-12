@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Notification from "@/components/Notification";
 import AuthProvider from "@/components/AuthProvider";
+import QueryProvider from "@/components/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,12 @@ export default function RootLayout({ children }) {
      
       <body className={inter.className}>
         <AuthProvider>
+          <QueryProvider>
         <Notification/>
       <Navbar/>
         {children}
         <Footer/>
+        </QueryProvider>
         </AuthProvider>
         </body>
      

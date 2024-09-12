@@ -1,8 +1,10 @@
-import { PrismaClient } from "@prisma/client"
 
+
+import { prisma } from "@/utils/connect"
 import { NextResponse } from "next/server"
 
-const prisma  = new PrismaClient()
+
+//get all prodact filtring by query params 
 
 export const GET = async (req) => {
     const url = new URL(req.url)
@@ -21,3 +23,6 @@ export const GET = async (req) => {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
+
+
+

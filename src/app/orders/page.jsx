@@ -1,4 +1,16 @@
-import React from 'react'
+'use client'
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+
+} from '@tanstack/react-query'
+
+const queryClient = useQueryClient()
+
+// Queries
+const query = useQuery({ queryKey: ['todos'], queryFn: fetch() })
 
 const page = () => {
   return (

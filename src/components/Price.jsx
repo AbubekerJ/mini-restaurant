@@ -8,17 +8,15 @@ const Price = ({ price, options }) => {
   const [quantity , setQuantity]=useState(1)
   
   useEffect(()=>{
-    setTotal(quantity*(options?price + options[select].additionalPrice:price
+    setTotal(quantity*(options.length>0 && options?price + options[select].additionalPrice:price
 
     ))
   },[quantity, price ,options ,select])
   return (
     <div className="flex flex-col gap-5 ">
-      <h1 className="text-lg font-bold">{total.toFixed(2
-        
-      )} ETB</h1>
+      <h1 className="text-lg font-bold">{total} ETB</h1>
       <div className="flex gap-2 ">
-        {options.map((option ,index) => (
+        {options?.map((option ,index) => (
           <button onClick={()=>setSelect(index)} key={option.title} className={ `ring-2 ring-orange-300 p-1 md:p-2 min-w-[4rem] ${select===index?"bg-orange-400 text-white":"bg-white"} `}>{option.title}</button>
         ))}
       </div>

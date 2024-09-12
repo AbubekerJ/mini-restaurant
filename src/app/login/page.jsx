@@ -7,7 +7,7 @@ import React from 'react'
 
 const page = () => {
   const router  = useRouter()
-  const { status}=useSession()
+  const {data, status}=useSession()
   if(status==='loading'){
     return <p>Loading</p>
   }
@@ -15,6 +15,7 @@ const page = () => {
   if(status==='authenticated'){
    router.push('/')
   }
+  
   return (
     <div className='flex flex-col md:flex-row h-[calc(100vh-3.5rem)] md:items-center md:justify-center   '>
         {/* image container */}
